@@ -1,0 +1,169 @@
+.home-slider {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-slider-container {
+  width: 100%;
+}
+
+.home-slider-container > div {
+  width: 100%;
+}
+
+.home-slide {
+  width: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.home-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.30);
+}
+
+.home-slide-content {
+  position: absolute;
+  top: 50%;
+  left: 120px;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (max-width: 1400px) {
+  .home-slide-content {
+    left: 80px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .home-slide-content {
+    left: 40px;
+  }
+}
+
+@media (max-width: 700px) {
+  .home-slide-content {
+    left: 16px;
+  }
+}
+
+.home-slide-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: white;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.home-slide-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+
+@media (max-width: 399px) {
+  .home-slide-title-row {
+    gap: 4px;
+  }
+}
+
+.home-slide-title-img {
+  height: 0.9em;
+  object-fit: contain;
+}
+
+.home-slide-animated-text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: var(--secondary);
+  white-space: nowrap;
+}
+
+/* Pagination Dots */
+.home-slider-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  z-index: 2;
+}
+
+.home-slider-dot {
+  height: 8px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.home-slider-dot.active {
+  background: white;
+  width: 18px;
+}
+
+.home-slider-dot.inactive {
+  width: 8px;
+}
+.hero-fly-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: heroFly 7s ease-in-out infinite;
+}
+
+.hero-airplane {
+  width: 60px;
+  height: auto;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+}
+
+.hero-fly-text {
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes heroFly {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  38% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  78% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 599px) {
+  .hero-airplane {
+    width: 36px;
+  }
+  .hero-fly-row {
+    gap: 10px;
+  }
+}

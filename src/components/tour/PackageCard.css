@@ -1,0 +1,247 @@
+.package-card {
+  display: block;
+  width: 100%;
+  background: white;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+  transition: all 0.18s ease-in-out;
+}
+
+.package-card:hover,
+.package-card.is-hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.package-card-img-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.package-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.package-card-page-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.package-card-page-dot {
+  height: 6px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.package-card-page-dot.active {
+  width: 18px;
+  background: white;
+}
+
+.package-card-page-dot.inactive {
+  width: 6px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.package-card-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.package-card-nav-btn.left {
+  left: 8px;
+}
+
+.package-card-nav-btn.right {
+  right: 8px;
+}
+
+.package-card-nav-icon {
+  font-size: 18px;
+  color: black;
+}
+
+.package-card-body {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.package-card-duration {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.package-card-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.package-card-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.package-card-divider {
+  height: 1px;
+  background: var(--divider);
+  margin: 10px 0;
+  border: none;
+}
+
+.package-card-save-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--save-bg);
+  border-radius: 30px;
+  padding: 5px 10px;
+  align-self: flex-start;
+}
+
+.package-card-save-icon {
+  font-size: 13px;
+  color: var(--save-green);
+}
+
+.package-card-save-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--save-green);
+}
+
+.package-card-price-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.package-card-price {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--price-red);
+}
+
+.package-card-cut-price {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-decoration: line-through;
+  padding-bottom: 2px;
+}
+
+@media (max-width: 900px) {
+  .package-card-duration {
+    font-size: 10px;
+  }
+  .package-card-name {
+    font-size: 14px;
+  }
+  .package-card-desc {
+    font-size: 12px;
+  }
+  .package-card-save-text {
+    font-size: 10px;
+  }
+  .package-card-price {
+    font-size: 15px;
+  }
+  .package-card-cut-price {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 901px) {
+  .package-card-img-wrap {
+    height: 170px;
+  }
+}
+
+@media (max-width: 900px) {
+  .package-card-img-wrap {
+    height: 130px;
+  }
+}
+.package-card-tag-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #FF6B00, #FF9500);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 2;
+}
+
+.package-card-save-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.package-card-emi-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #1877F2;
+  background: #E8F2FF;
+  padding: 5px 10px;
+  border-radius: 30px;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .package-card-tag-badge {
+    font-size: 9px;
+    padding: 4px 9px;
+  }
+  .package-card-emi-badge {
+    font-size: 9px;
+    padding: 4px 8px;
+  }
+}

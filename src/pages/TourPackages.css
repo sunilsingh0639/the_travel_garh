@@ -1,0 +1,42 @@
+.tour-packages-page {
+  padding-top: 20px;
+}
+
+.tour-package-group {
+  margin-bottom: 40px;
+}
+
+.tour-package-group:last-child {
+  margin-bottom: 0;
+}
+
+.tour-package-group-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #222;
+}
+
+.tour-packages-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1199px) {
+  .tour-packages-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 899px) {
+  .tour-packages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .tour-packages-grid {
+    grid-template-columns: 1fr;
+  }
+}
