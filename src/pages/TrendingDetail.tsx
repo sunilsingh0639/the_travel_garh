@@ -830,7 +830,7 @@ const formContent = (
         {pkg ? (
           <>
             <div style={{ padding: '16px 16px 12px', display: 'flex', alignItems: 'center', gap: 12 }}>
-              <img src={firstImg ? getImageUrl(firstImg) : staticImg} alt={pkgName} loading="lazy" style={{ width: 80, height: 80, borderRadius: 12, objectFit: 'cover', flexShrink: 0 }} />
+              <img src={firstImg ? getImageUrl(firstImg) : staticImg} alt={pkgName} loading="lazy" style={{ width: 80, height: 80, borderRadius: 12, objectFit: 'cover', flexShrink: 0, display: 'none' }} />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 15, fontWeight: 'bold', color: '#000', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{pkgName}</div>
                 <div style={{ fontSize: 13, color: '#999', marginTop: 4 }}>{pkgCity}</div>
@@ -841,7 +841,7 @@ const formContent = (
           </>
         ) : (
           <div style={{ padding: '16px 16px 12px', display: 'flex', alignItems: 'center', gap: 12 }}>
-            <img src={staticImg} alt="Travel" loading="lazy" style={{ width: 80, height: 80, borderRadius: 12, objectFit: 'cover', flexShrink: 0 }} />
+            <img src={staticImg} alt="Travel" loading="lazy" style={{ width: 80, height: 80, borderRadius: 12, objectFit: 'cover', flexShrink: 0, display: 'none' }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 15, fontWeight: 'bold', color: '#000', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>The TravelGarh</div>
             </div>

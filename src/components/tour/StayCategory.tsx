@@ -52,6 +52,8 @@ export default function StayCategory({
       padding: '28px 28px 24px',
       boxShadow: '0 2px 16px rgba(0,0,0,0.07)',
       maxWidth: 680,
+      width: '100%',
+      boxSizing: 'border-box',
     }}>
 
       {/* Stay Category */}
@@ -66,7 +68,7 @@ export default function StayCategory({
             <div
               key={opt.id}
               onClick={() => handleStay(opt.id)}
-              style={{ cursor: 'pointer', width: 175 }}
+              style={{ cursor: 'pointer', flex: '1 1 140px', maxWidth: 200, minWidth: 0 }}
             >
               {/* Image card */}
               <div style={{

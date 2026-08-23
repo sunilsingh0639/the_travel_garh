@@ -53,6 +53,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+#root {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
 }
 * {
   scrollbar-width: none; /* Firefox */
@@ -68,6 +75,9 @@ body {
   color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -94,6 +104,44 @@ button {
 input, textarea, select {
   font-family: inherit;
   font-size: inherit;
+  max-width: 100%;
+}
+
+button {
+  max-width: 100%;
+}
+
+video, iframe, table {
+  max-width: 100%;
+}
+
+/* Image / package cards: 3 desktop, 2 tablet, 1 mobile */
+.image-card-slide {
+  flex: 0 0 calc((100% - 32px) / 3);
+  width: calc((100% - 32px) / 3);
+  max-width: calc((100% - 32px) / 3);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 899px) {
+  .image-card-slide {
+    flex-basis: calc((100% - 16px) / 2);
+    width: calc((100% - 16px) / 2);
+    max-width: calc((100% - 16px) / 2);
+  }
+}
+
+@media (max-width: 599px) {
+  .image-card-slide {
+    flex-basis: 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  input, textarea, select {
+    font-size: 16px;
+  }
 }
 
 .material-icons {
@@ -176,6 +224,12 @@ input, textarea, select {
 @media (max-width: 899px) {
   .container {
     padding: 0 16px;
+  }
+}
+
+@media (max-width: 359px) {
+  .container {
+    padding: 0 12px;
   }
 }
 

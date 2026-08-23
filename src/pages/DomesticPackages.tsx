@@ -283,7 +283,6 @@ export default function DomesticPackages() {
   }
 
   const listHeight = w > 900 ? 400 : 360
-  const cardWidth = w > 1400 ? 280 : w > 1100 ? 260 : w > 700 ? 240 : 200
 
   return (
     <>
@@ -305,8 +304,8 @@ export default function DomesticPackages() {
         <div style={{ marginTop: 20, minHeight: listHeight, position: 'relative' }}>
           {loading ? (
             <div style={{ display: 'flex', gap: 16 }}>
-              {[1, 2, 3, 4].map(i => (
-                <div key={i} className="skeleton" style={{ width: cardWidth, height: listHeight - 40, borderRadius: 16, flexShrink: 0 }} />
+              {[1, 2, 3].map(i => (
+                <div key={i} className="skeleton image-card-slide" style={{ height: listHeight - 40, borderRadius: 16 }} />
               ))}
             </div>
           ) : packages.length === 0 ? (
@@ -315,7 +314,7 @@ export default function DomesticPackages() {
             <>
               <div ref={scrollRef} style={{ display: 'flex', gap: 16, overflowX: 'auto', paddingBottom: 8, scrollSnapType: 'x mandatory' }}>
                 {packages.map(pkg => (
-                  <div key={pkg.id} style={{ flexShrink: 0, width: cardWidth }}>
+                  <div key={pkg.id} className="image-card-slide">
                     <PackageCard pkg={pkg} linkPath={`/trending/${pkg.slug}`} />
                   </div>
                 ))}

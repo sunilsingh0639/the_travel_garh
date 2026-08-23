@@ -1,6 +1,7 @@
 .package-card {
   display: block;
   width: 100%;
+  min-width: 0;
   background: white;
   border-radius: var(--radius-xl);
   overflow: hidden;
@@ -197,9 +198,12 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 599px) {
   .package-card-img-wrap {
-    height: 130px;
+    height: 180px;
+  }
+  .package-card-save-row {
+    flex-wrap: wrap;
   }
 }
 .package-card-tag-badge {

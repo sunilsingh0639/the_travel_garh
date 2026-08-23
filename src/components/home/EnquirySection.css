@@ -305,6 +305,15 @@
   .explore-checkbox-grid {
     grid-template-columns: 1fr;
   }
+  .enquiry-form {
+    padding: 20px 16px;
+  }
+  .toggle-row {
+    grid-template-columns: 1fr;
+  }
+  .step2-btn-row {
+    flex-direction: column;
+  }
 }
 /* ── Region Search Autocomplete ── */
 .region-search-wrap {

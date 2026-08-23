@@ -47,3 +47,18 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.modal-content {
+  box-sizing: border-box;
+}
+
+@media (max-width: 599px) {
+  .modal-content {
+    padding: 20px 16px;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+    align-items: flex-end;
+  }
+}

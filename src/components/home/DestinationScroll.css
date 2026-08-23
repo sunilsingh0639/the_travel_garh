@@ -29,6 +29,20 @@
     padding-left: 8px;
     padding-right: 8px;
   }
+
+  .destination-wrapper {
+    height: 78px;
+  }
+
+  .destination-chip {
+    width: 76px;
+    height: 76px;
+  }
+
+  .destination-chip-label {
+    font-size: 11px;
+    max-width: 70px;
+  }
 }
 @media (max-width: 899px) {
   .destination-arrow-btn {
