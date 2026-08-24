@@ -10,7 +10,7 @@ import PackageCard from '../components/tour/PackageCard'
 import StayCategory from '../components/tour/StayCategory'
 import ReviewSection from '../components/home/ReviewSection'
 import './TrendingDetail.css'
-
+import { useNavigate } from 'react-router-dom';
 function getPad(w: number) {
   if (w >= 1400) return 120; if (w >= 1100) return 80; if (w >= 900) return 40; return 16
 }
@@ -334,6 +334,7 @@ function getPkgImage(pkg: PackageDetailModel | { name: string; city: string; ima
 }
 
 function EnquiryDialog({ pkg, mobile, onClose, showDestinationField }: { pkg: PackageDetailModel | { name: string; city: string; image: string } | null; mobile: boolean; onClose: () => void; showDestinationField?: boolean }) {
+  const navigate = useNavigate();
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
@@ -442,7 +443,11 @@ function handleContinue(e: React.FormEvent) {
       duration: pkgNights,
     }
     const res2 = await submitEnquiry(payload)
-    if (res2?.success) { setOk('Enquiry sent! Our expert will contact you soon.') }
+    if (res2?.success) {
+       setOk('Enquiry sent! Our expert will contact you soon.') 
+      onClose(); // Modal close karein
+      navigate('/thank-you'); // Thank You page pe navigate karein
+      }
     else { setErr('Something went wrong. Please try again.') }
     setLoading(false)
   }

@@ -12,6 +12,7 @@ import TrendingDetail from './pages/TrendingDetail'
 import BlogDetail from './pages/BlogDetail'
 import UpcomingTrips from './pages/UpcomingTrips'
 import ValueForMoney from './pages/ValueForMoney'
+import ThankYou from './pages/ThankYou'
 
 export default function AppRouter() {
   return (
@@ -31,6 +32,8 @@ export default function AppRouter() {
         <Route path="/international/:name/:city" element={<InternationalDetails />} />
         <Route path="/trending/:name" element={<TrendingDetail />} />
         <Route path="/blog/:slug" element={<BlogDetail />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+
       </Route>
     </Routes>
   )
