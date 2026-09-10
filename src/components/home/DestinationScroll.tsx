@@ -708,11 +708,17 @@ export default function DestinationScroll() {
   const [items, setItems] = useState<DestItem[]>([])
   const navigate = useNavigate()
 
+  const EXCLUDED_CITIES = new Set(['Lakshadweep', 'Rajasthan', 'Domestic Tour Packages', 'International Tour Packages'])
+
   useEffect(() => {
     getCities().then(({ domestic, international }) => {
       const all: DestItem[] = [
-        ...domestic.sort((a, b) => a.displayOrder - b.displayOrder).map(c => ({ title: c.name, slug: c.slug, isDomestic: true })),
-        ...international.sort((a, b) => a.displayOrder - b.displayOrder).map(c => ({ title: c.name, slug: c.slug, isDomestic: false })),
+        ...domestic.sort((a, b) => a.displayOrder - b.displayOrder)
+          .filter(c => !EXCLUDED_CITIES.has(c.name))
+          .map(c => ({ title: c.name, slug: c.slug, isDomestic: true })),
+        ...international.sort((a, b) => a.displayOrder - b.displayOrder)
+          .filter(c => !EXCLUDED_CITIES.has(c.name))
+          .map(c => ({ title: c.name, slug: c.slug, isDomestic: false })),
       ]
       setItems(all)
     })

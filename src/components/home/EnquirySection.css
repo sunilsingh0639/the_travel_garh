@@ -299,6 +299,9 @@
     grid-template-columns: 1fr;
     gap: 30px;
   }
+  .enquiry-info {
+    display: none;
+  }
   .form-row {
     grid-template-columns: 1fr;
   }
