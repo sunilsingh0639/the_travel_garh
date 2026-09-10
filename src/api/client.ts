@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-export const API_BASE = 'https://travls.parkensolution.in/api';
-export const IMAGE_BASE = 'https://travls.parkensolution.in';
-
+// export const API_BASE = 'https://travls.parkensolution.in/api';
+// export const IMAGE_BASE = 'https://travls.parkensolution.in';
+export const API_BASE = 'https://api.thetravelgarh.com/api';
+export const IMAGE_BASE = 'https://api.thetravelgarh.com';
 export const apiClient = axios.create({
   baseURL: API_BASE,
   headers: { 'Content-Type': 'application/json' },

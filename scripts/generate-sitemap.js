@@ -1,9 +1,9 @@
 import fs from 'fs'
 import axios from 'axios'
 
-const SITE_URL = 'https://www.thetravelgarh.com'
-const API_BASE = 'https://travls.parkensolution.in/api'
-
+ const SITE_URL = 'https://www.thetravelgarh.com'
+// const API_BASE = 'https://travls.parkensolution.in/api'
+const API_BASE = 'https://api.thetravelgarh.com/api';
 function escapeXml(str) {
   return str
     .replace(/&/g, '&amp;')
