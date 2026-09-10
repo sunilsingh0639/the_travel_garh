@@ -1,12 +1,11 @@
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import type { PackageDetailModel, ItineraryItem, HotelModel, PackageModel } from '../types'
-import { getPackageDetail, getSimilarPackages } from '../api/package'
+import type { PackageDetailModel, ItineraryItem, HotelModel } from '../types'
+import { getPackageDetail } from '../api/package'
 import { getImageUrl, assetUrl } from '../api/client'
 import { submitEnquiry, type EnquiryPayload } from '../api/enquiry'
-import PackageCard from '../components/tour/PackageCard'
 import StayCategory from '../components/tour/StayCategory'
 import ReviewSection from '../components/home/ReviewSection'
 import './TrendingDetail.css'
@@ -34,7 +33,6 @@ const REGIONS: Record<string, string[]> = {
 export default function TrendingDetail() {
   const { name: slug } = useParams()
   const [pkg, setPkg] = useState<PackageDetailModel | null>(null)
-  const [similar, setSimilar] = useState<PackageModel[]>([])
   const [loading, setLoading] = useState(true)
   // const [expandedDay, setExpandedDay] = useState<number | null>(0)
   // const [showEnquiry, setShowEnquiry] = useState(false)
@@ -42,13 +40,7 @@ export default function TrendingDetail() {
   const [showEnquiry, setShowEnquiry] = useState(false)
   const [images, setImages] = useState<string[]>([])
   const [w, setW] = useState(1200)
-  const similarScrollRef = useRef<HTMLDivElement>(null)
-  const [showSimilarLeftArrow, setShowSimilarLeftArrow] = useState(false)
 
-  function slideSimilar(delta: number) {
-    if (delta > 0) setShowSimilarLeftArrow(true)
-    similarScrollRef.current?.scrollBy({ left: delta, behavior: 'smooth' })
-  }
 
   useEffect(() => {
     const onResize = () => setW(window.innerWidth)
@@ -60,7 +52,7 @@ export default function TrendingDetail() {
   const pad = getPad(w)
   const mobile = w < 900
 
-useEffect(() => {``
+useEffect(() => {
     if (!slug) return
     setLoading(true)
     getPackageDetail(slug).then(detail => {
@@ -73,8 +65,7 @@ useEffect(() => {``
           image: detail.images[0]?.imagePath || ''
         }))
       }
-    }).catch(() => {})
-    getSimilarPackages(slug).then(setSimilar).catch(() => {}).finally(() => setLoading(false))
+    }).catch(() => {}).finally(() => setLoading(false))
 
     return () => sessionStorage.removeItem('currentPkg')
   }, [slug])

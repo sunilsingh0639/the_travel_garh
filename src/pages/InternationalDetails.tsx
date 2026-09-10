@@ -136,9 +136,8 @@ const fetchPackages = (cityName: string) => {
                       onClick={() => slidePackages(-296)}
                       aria-label="Left"
                       style={{
-                        display: w < 768 ? 'none' : 'flex', position: 'absolute', top: '40%', left: 10, transform: 'translateY(-50%)',
+                        display: w < 768 ? 'none' : 'flex', position: 'absolute', top: '40%', left: 10, transform: 'translateY(-50%)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                         width: 40, height: 40, borderRadius: '50%', background: 'white', border: 'none',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                         boxShadow: '0 4px 10px rgba(0,0,0,0.10)', zIndex: 2,
                       }}
                     >
@@ -149,9 +148,8 @@ const fetchPackages = (cityName: string) => {
                     onClick={() => slidePackages(296)}
                     aria-label="Right"
                     style={{
-                      display: w < 768 ? 'none' : 'flex', position: 'absolute', top: '40%', right: 10, transform: 'translateY(-50%)',
+                      display: w < 768 ? 'none' : 'flex', position: 'absolute', top: '40%', right: 10, transform: 'translateY(-50%)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                       width: 40, height: 40, borderRadius: '50%', background: 'white', border: 'none',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                       boxShadow: '0 4px 10px rgba(0,0,0,0.10)', zIndex: 2,
                     }}
                   >
