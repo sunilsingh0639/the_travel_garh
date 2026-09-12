@@ -112,7 +112,7 @@
 //           ) : packages.length === 0 ? (
 //             <p style={{ fontSize: 16, color: '#999' }}>No packages found for this destination.</p>
 //           ) : (
-//             <div style={{ display: 'flex', gap: 16, overflowX: 'auto', paddingBottom: 8, scrollSnapType: 'x mandatory' }}>
+//             <div style={{ display: w < 768 ? 'grid' : 'flex', gridTemplateColumns: w < 768 ? '1fr' : undefined, gap: 16, overflowX: w < 768 ? 'visible' : 'auto', paddingBottom: 8, scrollSnapType: w < 768 ? 'none' : 'x mandatory' }}>
 //               {packages.map(pkg => (
 //                 <div key={pkg.id} style={{ flexShrink: 0, width: cardWidth }}>
 //                   <PackageCard pkg={pkg} linkPath={`/trending/${pkg.slug}`} />
@@ -312,7 +312,7 @@ export default function DomesticPackages() {
             <p style={{ fontSize: 16, color: '#999' }}>No packages found for this destination.</p>
           ) : (
             <>
-              <div ref={scrollRef} style={{ display: 'flex', gap: 16, overflowX: 'auto', paddingBottom: 8, scrollSnapType: 'x mandatory' }}>
+              <div ref={scrollRef} style={{ display: w < 768 ? 'grid' : 'flex', gridTemplateColumns: w < 768 ? '1fr' : undefined, gap: 16, overflowX: w < 768 ? 'visible' : 'auto', paddingBottom: 8, scrollSnapType: w < 768 ? 'none' : 'x mandatory' }}>
                 {packages.map(pkg => (
                   <div key={pkg.id} className="image-card-slide">
                     <PackageCard pkg={pkg} linkPath={`/trending/${pkg.slug}`} />
@@ -327,9 +327,8 @@ export default function DomesticPackages() {
                       onClick={() => slidePackages(-296)}
                       aria-label="Left"
                       style={{
-                        position: 'absolute', top: '40%', left: 10, transform: 'translateY(-50%)',
+                        display: w < 768 ? 'none' : 'flex', position: 'absolute', top: '40%', left: 10, transform: 'translateY(-50%)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                         width: 40, height: 40, borderRadius: '50%', background: 'white', border: 'none',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                         boxShadow: '0 4px 10px rgba(0,0,0,0.10)', zIndex: 2,
                       }}
                     >
@@ -340,9 +339,8 @@ export default function DomesticPackages() {
                     onClick={() => slidePackages(296)}
                     aria-label="Right"
                     style={{
-                      position: 'absolute', top: '40%', right: 10, transform: 'translateY(-50%)',
+                      display: w < 768 ? 'none' : 'flex', position: 'absolute', top: '40%', right: 10, transform: 'translateY(-50%)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                       width: 40, height: 40, borderRadius: '50%', background: 'white', border: 'none',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                       boxShadow: '0 4px 10px rgba(0,0,0,0.10)', zIndex: 2,
                     }}
                   >

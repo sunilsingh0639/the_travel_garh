@@ -149,9 +149,10 @@ interface FormState {
   email: string
   travelDate: string
   message: string
+  city: string
 }
 
-const initialForm: FormState = { name: '', phone: '', email: '', travelDate: '', message: '' }
+const initialForm: FormState = { name: '', phone: '', email: '', travelDate: '', message: '', city: '' }
 
 export default function EnquirySection() {
   const [step, setStep] = useState<1 | 2>(1)
@@ -226,6 +227,7 @@ function togglePlace(place: string) {
         packageSlug: '',
         packageName: '',
         destination: region,
+        city: form.city,
         numberOfAdults: 1,
         numberOfChildren: 0,
         isDateFlexible: travelType === 'flexible',
@@ -405,6 +407,11 @@ function togglePlace(place: string) {
                 </div>
 
                 <div className="form-group">
+                  <label htmlFor="city">Which city are you travelling from?</label>
+                  <input id="city" name="city" value={form.city} onChange={handleChange} placeholder="e.g. Delhi, Mumbai" />
+                </div>
+
+                <div className="form-group">
                   <label htmlFor="message">Message (optional)</label>
                   <textarea id="message" name="message" value={form.message} onChange={handleChange} rows={4} placeholder="Any additional details" />
                 </div>
@@ -412,7 +419,7 @@ function togglePlace(place: string) {
                 <div className="step2-btn-row">
                   <button type="button" className="btn btn-secondary" onClick={() => setStep(1)}>Back</button>
                   <button type="submit" className="btn btn-primary enquiry-submit" disabled={submitting}>
-                    {submitting ? 'Sending...' : 'Send Enquiry'}
+                    {submitting ? 'Sending...' : 'Get Free Quote'}
                   </button>
                 </div>
               </form>

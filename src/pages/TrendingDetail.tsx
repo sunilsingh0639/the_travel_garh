@@ -1,12 +1,11 @@
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import type { PackageDetailModel, ItineraryItem, HotelModel, PackageModel } from '../types'
-import { getPackageDetail, getSimilarPackages } from '../api/package'
+import type { PackageDetailModel, ItineraryItem, HotelModel } from '../types'
+import { getPackageDetail } from '../api/package'
 import { getImageUrl, assetUrl } from '../api/client'
 import { submitEnquiry, type EnquiryPayload } from '../api/enquiry'
-import PackageCard from '../components/tour/PackageCard'
 import StayCategory from '../components/tour/StayCategory'
 import ReviewSection from '../components/home/ReviewSection'
 import './TrendingDetail.css'
@@ -34,7 +33,6 @@ const REGIONS: Record<string, string[]> = {
 export default function TrendingDetail() {
   const { name: slug } = useParams()
   const [pkg, setPkg] = useState<PackageDetailModel | null>(null)
-  const [similar, setSimilar] = useState<PackageModel[]>([])
   const [loading, setLoading] = useState(true)
   // const [expandedDay, setExpandedDay] = useState<number | null>(0)
   // const [showEnquiry, setShowEnquiry] = useState(false)
@@ -42,13 +40,7 @@ export default function TrendingDetail() {
   const [showEnquiry, setShowEnquiry] = useState(false)
   const [images, setImages] = useState<string[]>([])
   const [w, setW] = useState(1200)
-  const similarScrollRef = useRef<HTMLDivElement>(null)
-  const [showSimilarLeftArrow, setShowSimilarLeftArrow] = useState(false)
 
-  function slideSimilar(delta: number) {
-    if (delta > 0) setShowSimilarLeftArrow(true)
-    similarScrollRef.current?.scrollBy({ left: delta, behavior: 'smooth' })
-  }
 
   useEffect(() => {
     const onResize = () => setW(window.innerWidth)
@@ -60,7 +52,7 @@ export default function TrendingDetail() {
   const pad = getPad(w)
   const mobile = w < 900
 
-useEffect(() => {``
+useEffect(() => {
     if (!slug) return
     setLoading(true)
     getPackageDetail(slug).then(detail => {
@@ -73,8 +65,7 @@ useEffect(() => {``
           image: detail.images[0]?.imagePath || ''
         }))
       }
-    }).catch(() => {})
-    getSimilarPackages(slug).then(setSimilar).catch(() => {}).finally(() => setLoading(false))
+    }).catch(() => {}).finally(() => setLoading(false))
 
     return () => sessionStorage.removeItem('currentPkg')
   }, [slug])
@@ -265,53 +256,6 @@ useEffect(() => {``
         </div>
       )}
 
-      {/* ===== SIMILAR PACKAGES ===== */}
-      {similar.length > 0 && (
-        <div style={{ padding: `20px ${pad}px` }}>
-          <h2 style={{ fontSize: 28, fontWeight: 'bold', marginBottom: 20 }}>Similar Tour Packages</h2>
-          <div style={{ position: 'relative' }}>
-            <div ref={similarScrollRef} style={{ display: 'flex', gap: 16, overflowX: 'auto', paddingBottom: 8 }} className="similar-scroll">
-              {similar.map(p => (
-                <div key={p.id} style={{ flexShrink: 0, width: w > 1400 ? 280 : w > 1100 ? 260 : w > 700 ? 240 : 200 }}>
-                  <PackageCard pkg={p} />
-                </div>
-              ))}
-            </div>
-
-            {similar.length > 1 && (
-              <>
-                {showSimilarLeftArrow && (
-                  <button
-                    onClick={() => slideSimilar(-296)}
-                    aria-label="Left"
-                    style={{
-                      position: 'absolute', top: '40%', left: 10, transform: 'translateY(-50%)',
-                      width: 40, height: 40, borderRadius: '50%', background: 'white', border: 'none',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-                      boxShadow: '0 4px 10px rgba(0,0,0,0.10)', zIndex: 2,
-                    }}
-                  >
-                    <span style={{ fontSize: 22, color: 'rgba(0,0,0,0.87)' }}>&#10094;</span>
-                  </button>
-                )}
-                <button
-                  onClick={() => slideSimilar(296)}
-                  aria-label="Right"
-                  style={{
-                    position: 'absolute', top: '40%', right: 10, transform: 'translateY(-50%)',
-                    width: 40, height: 40, borderRadius: '50%', background: 'white', border: 'none',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
-                    boxShadow: '0 4px 10px rgba(0,0,0,0.10)', zIndex: 2,
-                  }}
-                >
-                  <span style={{ fontSize: 22, color: 'rgba(0,0,0,0.87)' }}>&#10095;</span>
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* ===== REVIEWS ===== */}
       <ReviewSection />
 
@@ -351,6 +295,7 @@ function EnquiryDialog({ pkg, mobile, onClose, showDestinationField }: { pkg: Pa
   const [flightTicket, setFlightTicket] = useState<'yes' | 'no' | ''>('')
   const [hotelCategoryChoice, setHotelCategoryChoice] = useState('')
   const [budget, setBudget] = useState('')
+  const [travellingFromCity, setTravellingFromCity] = useState('')
   const [err, setErr] = useState('')
   const [ok, setOk] = useState('')
   const [loading, setLoading] = useState(false)
@@ -440,6 +385,7 @@ function handleContinue(e: React.FormEvent) {
       preferredHotelCategory: hotelCategoryChoice,
       budgetRange: budget,
       wantToExplore: selectedPlaces.join(', '),
+      city: travellingFromCity,
       duration: pkgNights,
     }
     const res2 = await submitEnquiry(payload)
@@ -691,6 +637,15 @@ const formContent = (
             </div>
           )}
 
+          <div style={{ marginBottom: 12 }}>
+            <input
+              placeholder="Which city are you travelling from?"
+              value={travellingFromCity}
+              onChange={e => setTravellingFromCity(e.target.value)}
+              style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' as any }}
+            />
+          </div>
+
           <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
             <div style={{ flex: 1 }}><input type="date" placeholder="Date of Travel" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' }} /></div>
 
@@ -714,7 +669,7 @@ const formContent = (
             width: '100%', height: 52, background: '#FF1E1E', color: '#fff',
             border: 'none', borderRadius: 12, fontSize: 16, fontWeight: 'bold', cursor: 'pointer',
           }}>
-            Connect with Expert
+            Get Free Quote
           </button>
 
           <p style={{ textAlign: 'center', fontSize: 12, color: '#999', marginTop: 8 }}>We'll get back to you within 24 hours</p>
@@ -955,19 +910,18 @@ function TopInfoCard({ pkg, small }: { pkg: PackageDetailModel; small: boolean }
 
 /* ── Private Trips ── */
 function PrivateTrips({ mobile }: { mobile: boolean }) {
+  const PHONE = '+917425833258'
   return (
     <div style={{ width: '100%', padding: 24, background: '#fff', borderRadius: 28 }}>
-      <h3 style={{ fontSize: 22, fontWeight: 'bold', margin: 0 }}>Private Trips Available</h3>
-      <p style={{ fontSize: 16, color: '#555', margin: '6px 0 24px' }}>for Group of 2+ Travellers</p>
       {mobile ? (
         <div>
-          <button style={{ width: '100%', height: 48, border: '1px solid #bdbdbd', borderRadius: 8, background: '#fff', color: '#999', fontSize: 14, cursor: 'pointer' }}>📞 Request a Callback</button>
+          <a href={`tel:${PHONE}`} style={{ display: 'block', width: '100%', height: 48, border: '1px solid #bdbdbd', borderRadius: 8, background: '#fff', color: '#999', fontSize: 14, cursor: 'pointer', textDecoration: 'none', lineHeight: '48px', textAlign: 'center' }}>📞 Request a Callback</a>
           <div style={{ height: 12 }} />
           <button style={{ width: '100%', height: 48, border: '1px solid #bdbdbd', borderRadius: 8, background: '#fff', color: '#999', fontSize: 14, cursor: 'pointer' }}>⬇ Get PDF</button>
         </div>
       ) : (
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-          <button style={{ width: 220, height: 48, border: '1px solid #bdbdbd', borderRadius: 8, background: '#fff', color: '#999', fontSize: 14, cursor: 'pointer' }}>📞 Request a Callback</button>
+          <a href={`tel:${PHONE}`} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 220, height: 48, border: '1px solid #bdbdbd', borderRadius: 8, background: '#fff', color: '#999', fontSize: 14, cursor: 'pointer', textDecoration: 'none' }}>📞 Request a Callback</a>
           <button style={{ width: 150, height: 48, border: '1px solid #bdbdbd', borderRadius: 8, background: '#fff', color: '#999', fontSize: 14, cursor: 'pointer' }}>⬇ Get PDF</button>
         </div>
       )}
@@ -1005,7 +959,7 @@ function PrivateTrips({ mobile }: { mobile: boolean }) {
 //           </div>
 //         </div>
 //         <hr style={{ margin: '16px 0', border: 'none', borderTop: '1px solid #eee' }} />
-//         <div style={{ textAlign: 'center', fontSize: small ? 12 : 14, color: '#999' }}>{pkg.city} Package with Triple Sharing</div>
+//         <div style={{ textAlign: 'center', fontSize: small ? 12 : 14, color: '#999' }}>{pkg.city} Package with Double Sharing</div>
 //         <div style={{ textAlign: 'center', fontSize: small ? 13 : 15, fontWeight: 'bold', marginTop: 6 }}>{pkg.days} Days {pkg.nights} Nights</div>
 //         <button
 //           onClick={onEnquiry}
@@ -1059,7 +1013,7 @@ function PriceCard({ pkg, saveStr, small, onEnquiry }: { pkg: PackageDetailModel
           )}
         </div>
         <hr style={{ margin: '16px 0', border: 'none', borderTop: '1px solid #eee' }} />
-        <div style={{ textAlign: 'center', fontSize: small ? 12 : 14, color: '#999' }}>{pkg.city} Package with Triple Sharing</div>
+        <div style={{ textAlign: 'center', fontSize: small ? 12 : 14, color: '#999' }}>{pkg.city} Package with Double Sharing</div>
         <div style={{ textAlign: 'center', fontSize: small ? 13 : 15, fontWeight: 'bold', marginTop: 6 }}>{pkg.days} Days {pkg.nights} Nights</div>
         <button
           onClick={onEnquiry}

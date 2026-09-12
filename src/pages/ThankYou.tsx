@@ -59,8 +59,8 @@ export default function ThankYou() {
         <div className="assistance-box">
           <h3>Need Immediate Assistance?</h3>
           <p>Call us now, we are happy to help you!</p>
-          <a href="tel:+919816945091" className="call-button">
-            📞 +91 9816945091
+          <a href="tel:+917425833258" className="call-button">
+            📞 +91 7425833258
           </a>
         </div>
 
