@@ -8,12 +8,12 @@ import PackageCard from '../components/tour/PackageCard'
 import ReviewSection from '../components/home/ReviewSection'
 import './TrendingDetail.css'
 
-const cities = [
-  'Ahmedabad', 'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad',
-  'Chennai', 'Kolkata', 'Pune', 'Surat', 'Jaipur',
-  'Lucknow', 'Kochi', 'Chandigarh', 'Indore', 'Nagpur',
-  'Bhopal', 'Goa', 'Rajkot', 'Vadodara', 'Coimbatore',
-]
+// const cities = [
+//   'Ahmedabad', 'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad',
+//   'Chennai', 'Kolkata', 'Pune', 'Surat', 'Jaipur',
+//   'Lucknow', 'Kochi', 'Chandigarh', 'Indore', 'Nagpur',
+//   'Bhopal', 'Goa', 'Rajkot', 'Vadodara', 'Coimbatore',
+// ]
 
 export default function InternationalDetails() {
   const { name, city } = useParams()
@@ -165,13 +165,13 @@ const fetchPackages = (cityName: string) => {
       <ReviewSection />
 
       <div style={{ background: '#f5f5f5', padding: `35px ${pad}px` }}>
-        <CityChips
+        {/* <CityChips
           title={`${destination} Tour Packages From Popular Cities`}
           items={cities.map(c => `${destination} Tour Packages from ${c}`)}
           labels={cities}
           active={selectedCity}
           onSelect={c => goTo(`/international/${name}/${c.toLowerCase().replace(/\s+/g, '-')}`)}
-        />
+        /> */}
         <div style={{ height: 50 }} />
         <CityChips
           title="Popular Domestic Destinations"
