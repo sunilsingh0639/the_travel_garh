@@ -171,6 +171,52 @@
   padding-bottom: 2px;
 }
 
+.package-card-price-on-request {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #555;
+  font-style: italic;
+}
+
+.package-card-action-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.package-card-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 6px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+
+.package-card-btn:hover {
+  opacity: 0.88;
+}
+
+.package-card-btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+}
+
+.package-card-btn-call {
+  background: #FF1E1E;
+  color: #fff;
+}
+
 @media (max-width: 900px) {
   .package-card-duration {
     font-size: 10px;
@@ -189,6 +235,13 @@
   }
   .package-card-cut-price {
     font-size: 10px;
+  }
+  .package-card-price-on-request {
+    font-size: 13px;
+  }
+  .package-card-btn {
+    font-size: 11px;
+    padding: 7px 4px;
   }
 }
 

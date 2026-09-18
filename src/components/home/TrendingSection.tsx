@@ -274,9 +274,15 @@ function TrendingCard({ pkg, onClick }: { pkg: TrendingModel['packages'][0]; onC
         )}
 
         <div className="trending-card-price-row">
-          <span className="trending-card-price">₹ {pkg.price.toLocaleString()}</span>
-          {pkg.cutPrice > 0 && (
-            <span className="trending-card-cut-price">₹ {pkg.cutPrice.toLocaleString()}</span>
+          {pkg.price > 0 ? (
+            <>
+              <span className="trending-card-price">₹ {pkg.price.toLocaleString()}</span>
+              {pkg.cutPrice > 0 && (
+                <span className="trending-card-cut-price">₹ {pkg.cutPrice.toLocaleString()}</span>
+              )}
+            </>
+          ) : (
+            <span className="trending-card-price-on-request">Price on Request</span>
           )}
         </div>
       </div>

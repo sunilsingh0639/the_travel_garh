@@ -183,7 +183,7 @@ useEffect(() => {
                           ;[newImages[0], newImages[clickedIdx]] = [newImages[clickedIdx], newImages[0]]
                           setImages(newImages)
                         }}
-                      />n
+                      />
                     </div>
                   ))}
                 </div>
@@ -1180,7 +1180,7 @@ function HotelSection({ hotels, mobile, days }: { hotels: HotelModel[]; mobile: 
                 )}
               <div>
                   <div style={{ fontSize: 13, color: '#999' }}>{st.type}</div>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: '#111' }}>₹ {(st.price ?? 0).toLocaleString()}</div>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: '#111' }}>{(st.price ?? 0) > 0 ? `₹ ${(st.price ?? 0).toLocaleString()}` : 'Price on Request'}</div>
                 </div>
               </div>
             )}

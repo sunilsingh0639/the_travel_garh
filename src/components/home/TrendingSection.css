@@ -259,6 +259,14 @@
   padding-bottom: 2px;
 }
 
+.trending-card-price-on-request {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #555;
+  font-style: italic;
+}
+
 @media (max-width: 900px) {
   .trending-card-duration {
     font-size: 10px;

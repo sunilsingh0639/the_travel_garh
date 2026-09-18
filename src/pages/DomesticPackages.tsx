@@ -202,7 +202,6 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import type { PackageModel } from '../types'
 import { getPackages } from '../api/package'
-import { getCities } from '../api/cities'
 import PackageCard from '../components/tour/PackageCard'
 import ReviewSection from '../components/home/ReviewSection'
 import './TrendingDetail.css'
@@ -220,8 +219,6 @@ export default function DomesticPackages() {
   const [packages, setPackages] = useState<PackageModel[]>([])
   const [loading, setLoading] = useState(true)
   const [w, setW] = useState(1200)
-  const [domesticList, setDomesticList] = useState<string[]>([])
-  const [internationalList, setInternationalList] = useState<string[]>([])
   const scrollRef = useRef<HTMLDivElement>(null)
   const [showLeftArrow, setShowLeftArrow] = useState(false)
 
@@ -269,13 +266,6 @@ export default function DomesticPackages() {
   useEffect(() => {
     fetchPackages(selectedCity || title)
   }, [title, selectedCity])
-
-  useEffect(() => {
-    getCities().then(({ domestic, international }) => {
-      setDomesticList(domestic.sort((a, b) => a.displayOrder - b.displayOrder).map(c => c.name))
-      setInternationalList(international.sort((a, b) => a.displayOrder - b.displayOrder).map(c => c.name))
-    })
-  }, [])
 
   function goTo(path: string) {
     window.scrollTo(0, 0)
@@ -355,32 +345,6 @@ export default function DomesticPackages() {
 
       <div style={{ height: 20 }} />
       <ReviewSection />
-
-      <div style={{ background: '#f5f5f5', padding: `35px ${pad}px` }}>
-        <CityChips
-          title={`${title} Tour Packages From Popular Cities`}
-          items={cities.map(c => `${title} Tour Packages from ${c}`)}
-          labels={cities}
-          active={selectedCity}
-          onSelect={c => goTo(`/domestic/${name}/${c.toLowerCase().replace(/\s+/g, '-')}`)}
-        />
-        <div style={{ height: 50 }} />
-        <CityChips
-          title="Popular Domestic Destinations"
-          items={domesticList}
-          labels={domesticList}
-          active=""
-          onSelect={c => goTo(`/domestic/${c.toLowerCase().replace(/\s+/g, '-')}`)}
-        />
-        <div style={{ height: 50 }} />
-        <CityChips
-          title="Popular International Destinations"
-          items={internationalList}
-          labels={internationalList}
-          active=""
-          onSelect={c => goTo(`/international/${c.toLowerCase().replace(/\s+/g, '-')}`)}
-        />
-      </div>
 
       <div style={{ height: 60 }} />
     </>
