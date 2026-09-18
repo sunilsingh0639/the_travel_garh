@@ -1,6 +1,6 @@
 .destination-section {
   width: 100%;
-  padding: 20px 120px;
+  padding: 12px 120px;
 }
 
 @media (max-width: 1399px) {
@@ -43,7 +43,7 @@
 .destination-wrapper {
   display: flex;
   align-items: center;
-  height: 90px;
+  height: 76px;
   gap: 0;
 }
 
@@ -88,8 +88,8 @@
 
 .destination-chip {
   flex-shrink: 0;
-  width: 88px;
-  height: 88px;
+  width: 76px;
+  height: 76px;
   border-radius: var(--radius-2xl);
   background: white;
   border: 1.4px solid rgba(255, 122, 0, 0.15);

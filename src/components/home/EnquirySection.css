@@ -1,138 +1,46 @@
-/* .enquiry-section {
-  background: white;
-}
-
-.enquiry-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
-}
-
-.enquiry-contact {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 24px;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-}
-
-.enquiry-form {
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text);
-}
-
-.form-group input,
-.form-group textarea {
-  padding: 10px 14px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.3s;
-  background: var(--bg);
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: var(--primary);
-}
-
-.enquiry-submit {
-  width: 100%;
-  padding: 14px;
-  font-size: 1rem;
-}
-
-.enquiry-success {
-  background: #dcfce7;
-  color: #166534;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-}
-
-.enquiry-error {
-  background: #fee2e2;
-  color: #991b1b;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-  .enquiry-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-} */
-
-
 .enquiry-section {
   background: white;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .enquiry-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 40px;
   align-items: start;
 }
 
 .enquiry-contact {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: 24px;
-  font-size: 0.95rem;
+  gap: 10px;
+  margin-top: 16px;
+  font-size: 0.9rem;
   color: var(--text-secondary);
 }
 
 .enquiry-form {
-  padding: 32px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 14px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .form-group label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: var(--text);
   text-transform: uppercase;
@@ -142,7 +50,7 @@
 .form-group input,
 .form-group textarea,
 .form-group select {
-  padding: 10px 14px;
+  padding: 9px 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 0.95rem;
@@ -160,14 +68,14 @@
 
 .enquiry-submit {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   font-size: 1rem;
 }
 
 .enquiry-success {
   background: #dcfce7;
   color: #166534;
-  padding: 12px 16px;
+  padding: 10px 14px;
   border-radius: 8px;
   font-size: 0.9rem;
 }
@@ -175,7 +83,7 @@
 .enquiry-error {
   background: #fee2e2;
   color: #991b1b;
-  padding: 12px 16px;
+  padding: 10px 14px;
   border-radius: 8px;
   font-size: 0.9rem;
 }
@@ -190,21 +98,21 @@
 .explore-checkbox-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 20px;
+  gap: 8px 16px;
 }
 
 .explore-checkbox-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text);
 }
 
 .explore-checkbox-item input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   accent-color: #e53935;
   cursor: pointer;
 }
@@ -213,22 +121,22 @@
 .toggle-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .toggle-btn {
-  padding: 12px;
+  padding: 10px;
   border: 1.5px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   background: white;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .toggle-btn.active {
@@ -237,12 +145,12 @@
 }
 
 .toggle-check {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #222;
   color: white;
-  font-size: 11px;
+  font-size: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -255,7 +163,7 @@
   justify-content: space-between;
   border: 1.5px solid #e53935;
   border-radius: 8px;
-  padding: 8px 14px;
+  padding: 7px 12px;
 }
 
 .stepper button {
@@ -265,24 +173,24 @@
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  width: 24px;
+  width: 22px;
 }
 
 .stepper span {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 
 /* ── Step 2 buttons ── */
 .step2-btn-row {
   display: flex;
-  gap: 12px;
-  margin-top: 4px;
+  gap: 10px;
+  margin-top: 2px;
 }
 
 .btn-secondary {
   flex: 1;
-  padding: 14px;
+  padding: 12px;
   background: white;
   border: 1.5px solid var(--border);
   border-radius: 8px;
@@ -294,30 +202,6 @@
   flex: 2;
 }
 
-@media (max-width: 768px) {
-  .enquiry-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  .enquiry-info {
-    display: none;
-  }
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-  .explore-checkbox-grid {
-    grid-template-columns: 1fr;
-  }
-  .enquiry-form {
-    padding: 20px 16px;
-  }
-  .toggle-row {
-    grid-template-columns: 1fr;
-  }
-  .step2-btn-row {
-    flex-direction: column;
-  }
-}
 /* ── Region Search Autocomplete ── */
 .region-search-wrap {
   position: relative;
@@ -333,15 +217,15 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-  max-height: 220px;
+  max-height: 200px;
   overflow-y: auto;
   z-index: 10;
 }
 
 .region-suggestion-item {
-  padding: 10px 14px;
+  padding: 9px 12px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text);
 }
 
@@ -350,7 +234,32 @@
 }
 
 .region-suggestion-empty {
-  padding: 10px 14px;
-  font-size: 0.9rem;
+  padding: 9px 12px;
+  font-size: 0.88rem;
   color: #999;
+}
+
+@media (max-width: 768px) {
+  .enquiry-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .enquiry-info {
+    display: none;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .explore-checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+  .enquiry-form {
+    padding: 16px 12px;
+  }
+  .toggle-row {
+    grid-template-columns: 1fr;
+  }
+  .step2-btn-row {
+    flex-direction: column;
+  }
 }

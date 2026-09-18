@@ -235,15 +235,15 @@ video, iframe, table {
 
 .section-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 35px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--text-primary);
 }
 
 .section-subtitle {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .btn {

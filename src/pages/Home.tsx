@@ -23,27 +23,27 @@ export default function Home() {
 
       <ErrorBoundary><HomeSlider /></ErrorBoundary>
 
-      <div style={{ height: 40 }} />
+      <div style={{ height: 24 }} />
 
       <ErrorBoundary><TrendingSection /></ErrorBoundary>
 
-      <div style={{ height: 40 }} />
+      <div style={{ height: 24 }} />
 
       <ErrorBoundary><InternationalDestinations /></ErrorBoundary>
 
-      <div style={{ height: 40 }} />
+      <div style={{ height: 24 }} />
 
       <ErrorBoundary><DomesticDestination /></ErrorBoundary>
 
-      <div style={{ height: 40 }} />
+      <div style={{ height: 24 }} />
 
       <ErrorBoundary><BlogSection /></ErrorBoundary>
 
-      <div style={{ height: 40 }} />
+      <div style={{ height: 24 }} />
 
       <ErrorBoundary><ReviewSection /></ErrorBoundary>
 
-      <div style={{ height: 40 }} />
+      <div style={{ height: 24 }} />
 
       <ErrorBoundary><TourismLogos /></ErrorBoundary>
 
