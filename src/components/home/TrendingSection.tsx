@@ -231,11 +231,12 @@ function TrendingCard({ pkg, onClick }: { pkg: TrendingModel['packages'][0]; onC
   return (
     <div
       className="trending-card"
+      style={{ width: 280 }}
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="trending-card-image-wrap">
+      <div className="trending-card-image-wrap" style={{ height: 180 }}>
         <img src={imgSrc} alt={pkg.name} loading="lazy"
           onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
         />
@@ -273,9 +274,15 @@ function TrendingCard({ pkg, onClick }: { pkg: TrendingModel['packages'][0]; onC
         )}
 
         <div className="trending-card-price-row">
-          <span className="trending-card-price">₹ {pkg.price.toLocaleString()}</span>
-          {pkg.cutPrice > 0 && (
-            <span className="trending-card-cut-price">₹ {pkg.cutPrice.toLocaleString()}</span>
+          {pkg.price > 0 ? (
+            <>
+              <span className="trending-card-price">₹ {pkg.price.toLocaleString()}</span>
+              {pkg.cutPrice > 0 && (
+                <span className="trending-card-cut-price">₹ {pkg.cutPrice.toLocaleString()}</span>
+              )}
+            </>
+          ) : (
+            <span className="trending-card-price-on-request">Price on Request</span>
           )}
         </div>
       </div>

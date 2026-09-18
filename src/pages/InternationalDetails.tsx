@@ -8,12 +8,12 @@ import PackageCard from '../components/tour/PackageCard'
 import ReviewSection from '../components/home/ReviewSection'
 import './TrendingDetail.css'
 
-const cities = [
-  'Ahmedabad', 'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad',
-  'Chennai', 'Kolkata', 'Pune', 'Surat', 'Jaipur',
-  'Lucknow', 'Kochi', 'Chandigarh', 'Indore', 'Nagpur',
-  'Bhopal', 'Goa', 'Rajkot', 'Vadodara', 'Coimbatore',
-]
+// const cities = [
+//   'Ahmedabad', 'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad',
+//   'Chennai', 'Kolkata', 'Pune', 'Surat', 'Jaipur',
+//   'Lucknow', 'Kochi', 'Chandigarh', 'Indore', 'Nagpur',
+//   'Bhopal', 'Goa', 'Rajkot', 'Vadodara', 'Coimbatore',
+// ]
 
 export default function InternationalDetails() {
   const { name, city } = useParams()
@@ -121,7 +121,7 @@ const fetchPackages = (cityName: string) => {
             <p style={{ fontSize: 16, color: '#999' }}>No packages found for this destination.</p>
           ) : (
             <>
-              <div ref={scrollRef} style={{ display: 'flex', gap: 16, overflowX: 'auto', paddingBottom: 8, scrollSnapType: 'x mandatory' }}>
+              <div ref={scrollRef} style={{ display: w < 768 ? 'grid' : 'flex', gridTemplateColumns: w < 768 ? '1fr' : undefined, gap: 16, overflowX: w < 768 ? 'visible' : 'auto', paddingBottom: 8, scrollSnapType: w < 768 ? 'none' : 'x mandatory' }}>
                 {packages.map(pkg => (
                   <div key={pkg.id} className="image-card-slide">
                     <PackageCard pkg={pkg} linkPath={`/trending/${pkg.slug}`} />
@@ -136,9 +136,8 @@ const fetchPackages = (cityName: string) => {
                       onClick={() => slidePackages(-296)}
                       aria-label="Left"
                       style={{
-                        position: 'absolute', top: '40%', left: 10, transform: 'translateY(-50%)',
+                        display: w < 768 ? 'none' : 'flex', position: 'absolute', top: '40%', left: 10, transform: 'translateY(-50%)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                         width: 40, height: 40, borderRadius: '50%', background: 'white', border: 'none',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                         boxShadow: '0 4px 10px rgba(0,0,0,0.10)', zIndex: 2,
                       }}
                     >
@@ -149,9 +148,8 @@ const fetchPackages = (cityName: string) => {
                     onClick={() => slidePackages(296)}
                     aria-label="Right"
                     style={{
-                      position: 'absolute', top: '40%', right: 10, transform: 'translateY(-50%)',
+                      display: w < 768 ? 'none' : 'flex', position: 'absolute', top: '40%', right: 10, transform: 'translateY(-50%)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                       width: 40, height: 40, borderRadius: '50%', background: 'white', border: 'none',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                       boxShadow: '0 4px 10px rgba(0,0,0,0.10)', zIndex: 2,
                     }}
                   >
@@ -167,13 +165,13 @@ const fetchPackages = (cityName: string) => {
       <ReviewSection />
 
       <div style={{ background: '#f5f5f5', padding: `35px ${pad}px` }}>
-        <CityChips
+        {/* <CityChips
           title={`${destination} Tour Packages From Popular Cities`}
           items={cities.map(c => `${destination} Tour Packages from ${c}`)}
           labels={cities}
           active={selectedCity}
           onSelect={c => goTo(`/international/${name}/${c.toLowerCase().replace(/\s+/g, '-')}`)}
-        />
+        /> */}
         <div style={{ height: 50 }} />
         <CityChips
           title="Popular Domestic Destinations"

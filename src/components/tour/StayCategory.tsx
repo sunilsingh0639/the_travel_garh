@@ -106,7 +106,7 @@ export default function StayCategory({
                   {opt.label}
                 </div>
                 <div style={{ fontSize: 16, fontWeight: 700, color: '#111' }}>
-                  ₹ {opt.price.toLocaleString()}
+                  {opt.price > 0 ? `₹ ${opt.price.toLocaleString()}` : 'Price on Request'}
                 </div>
               </div>
             </div>

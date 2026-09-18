@@ -4,6 +4,7 @@ export interface EnquiryPayload {
   name: string;
   email: string;
   phone: string;
+  city?: string;
   expectedTravelDate?: string;
   message: string;
   pageUrl: string;

@@ -112,7 +112,7 @@
 //           ) : packages.length === 0 ? (
 //             <p style={{ fontSize: 16, color: '#999' }}>No packages found for this destination.</p>
 //           ) : (
-//             <div style={{ display: 'flex', gap: 16, overflowX: 'auto', paddingBottom: 8, scrollSnapType: 'x mandatory' }}>
+//             <div style={{ display: w < 768 ? 'grid' : 'flex', gridTemplateColumns: w < 768 ? '1fr' : undefined, gap: 16, overflowX: w < 768 ? 'visible' : 'auto', paddingBottom: 8, scrollSnapType: w < 768 ? 'none' : 'x mandatory' }}>
 //               {packages.map(pkg => (
 //                 <div key={pkg.id} style={{ flexShrink: 0, width: cardWidth }}>
 //                   <PackageCard pkg={pkg} linkPath={`/trending/${pkg.slug}`} />
@@ -202,7 +202,6 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import type { PackageModel } from '../types'
 import { getPackages } from '../api/package'
-import { getCities } from '../api/cities'
 import PackageCard from '../components/tour/PackageCard'
 import ReviewSection from '../components/home/ReviewSection'
 import './TrendingDetail.css'
@@ -220,8 +219,6 @@ export default function DomesticPackages() {
   const [packages, setPackages] = useState<PackageModel[]>([])
   const [loading, setLoading] = useState(true)
   const [w, setW] = useState(1200)
-  const [domesticList, setDomesticList] = useState<string[]>([])
-  const [internationalList, setInternationalList] = useState<string[]>([])
   const scrollRef = useRef<HTMLDivElement>(null)
   const [showLeftArrow, setShowLeftArrow] = useState(false)
 
@@ -270,13 +267,6 @@ export default function DomesticPackages() {
     fetchPackages(selectedCity || title)
   }, [title, selectedCity])
 
-  useEffect(() => {
-    getCities().then(({ domestic, international }) => {
-      setDomesticList(domestic.sort((a, b) => a.displayOrder - b.displayOrder).map(c => c.name))
-      setInternationalList(international.sort((a, b) => a.displayOrder - b.displayOrder).map(c => c.name))
-    })
-  }, [])
-
   function goTo(path: string) {
     window.scrollTo(0, 0)
     navigate(path)
@@ -312,7 +302,7 @@ export default function DomesticPackages() {
             <p style={{ fontSize: 16, color: '#999' }}>No packages found for this destination.</p>
           ) : (
             <>
-              <div ref={scrollRef} style={{ display: 'flex', gap: 16, overflowX: 'auto', paddingBottom: 8, scrollSnapType: 'x mandatory' }}>
+              <div ref={scrollRef} style={{ display: w < 768 ? 'grid' : 'flex', gridTemplateColumns: w < 768 ? '1fr' : undefined, gap: 16, overflowX: w < 768 ? 'visible' : 'auto', paddingBottom: 8, scrollSnapType: w < 768 ? 'none' : 'x mandatory' }}>
                 {packages.map(pkg => (
                   <div key={pkg.id} className="image-card-slide">
                     <PackageCard pkg={pkg} linkPath={`/trending/${pkg.slug}`} />
@@ -327,9 +317,8 @@ export default function DomesticPackages() {
                       onClick={() => slidePackages(-296)}
                       aria-label="Left"
                       style={{
-                        position: 'absolute', top: '40%', left: 10, transform: 'translateY(-50%)',
+                        display: w < 768 ? 'none' : 'flex', position: 'absolute', top: '40%', left: 10, transform: 'translateY(-50%)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                         width: 40, height: 40, borderRadius: '50%', background: 'white', border: 'none',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                         boxShadow: '0 4px 10px rgba(0,0,0,0.10)', zIndex: 2,
                       }}
                     >
@@ -340,9 +329,8 @@ export default function DomesticPackages() {
                     onClick={() => slidePackages(296)}
                     aria-label="Right"
                     style={{
-                      position: 'absolute', top: '40%', right: 10, transform: 'translateY(-50%)',
+                      display: w < 768 ? 'none' : 'flex', position: 'absolute', top: '40%', right: 10, transform: 'translateY(-50%)', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                       width: 40, height: 40, borderRadius: '50%', background: 'white', border: 'none',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
                       boxShadow: '0 4px 10px rgba(0,0,0,0.10)', zIndex: 2,
                     }}
                   >
@@ -357,32 +345,6 @@ export default function DomesticPackages() {
 
       <div style={{ height: 20 }} />
       <ReviewSection />
-
-      <div style={{ background: '#f5f5f5', padding: `35px ${pad}px` }}>
-        <CityChips
-          title={`${title} Tour Packages From Popular Cities`}
-          items={cities.map(c => `${title} Tour Packages from ${c}`)}
-          labels={cities}
-          active={selectedCity}
-          onSelect={c => goTo(`/domestic/${name}/${c.toLowerCase().replace(/\s+/g, '-')}`)}
-        />
-        <div style={{ height: 50 }} />
-        <CityChips
-          title="Popular Domestic Destinations"
-          items={domesticList}
-          labels={domesticList}
-          active=""
-          onSelect={c => goTo(`/domestic/${c.toLowerCase().replace(/\s+/g, '-')}`)}
-        />
-        <div style={{ height: 50 }} />
-        <CityChips
-          title="Popular International Destinations"
-          items={internationalList}
-          labels={internationalList}
-          active=""
-          onSelect={c => goTo(`/international/${c.toLowerCase().replace(/\s+/g, '-')}`)}
-        />
-      </div>
 
       <div style={{ height: 60 }} />
     </>

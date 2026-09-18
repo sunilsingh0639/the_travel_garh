@@ -33,7 +33,7 @@ export default function ReviewSection() {
       {loading ? (
         <div className="review-scroll">
           {[1, 2, 3].map(i => (
-            <div key={i} className="review-card skeleton" style={{ height: 380 }} />
+            <div key={i} className="review-card skeleton" style={{ width: 260, height: 380 }} />
           ))}
         </div>
       ) : (
