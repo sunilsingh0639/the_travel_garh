@@ -231,11 +231,12 @@ function TrendingCard({ pkg, onClick }: { pkg: TrendingModel['packages'][0]; onC
   return (
     <div
       className="trending-card"
+      style={{ width: 280 }}
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div className="trending-card-image-wrap">
+      <div className="trending-card-image-wrap" style={{ height: 180 }}>
         <img src={imgSrc} alt={pkg.name} loading="lazy"
           onError={e => { (e.target as HTMLImageElement).style.display = 'none' }}
         />

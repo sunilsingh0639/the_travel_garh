@@ -91,10 +91,7 @@
 
 /* Trending Card */
 .trending-card {
-  flex: 0 0 calc((100% - 32px) / 3);
-  width: calc((100% - 32px) / 3);
-  max-width: calc((100% - 32px) / 3);
-  min-width: 0;
+  flex-shrink: 0;
   background: white;
   border-radius: var(--radius-xl);
   overflow: hidden;
@@ -111,7 +108,6 @@
 .trending-card-image-wrap {
   position: relative;
   overflow: hidden;
-  height: 180px;
 }
 
 .trending-card-image-wrap img {
@@ -284,31 +280,8 @@
   }
 }
 
-@media (max-width: 899px) {
-  .trending-card {
-    flex-basis: calc((100% - 16px) / 2);
-    width: calc((100% - 16px) / 2);
-    max-width: calc((100% - 16px) / 2);
-  }
-}
-
 @media (max-width: 599px) {
   .trending-arrow-btn {
     display: none;
-  }
-
-  .trending-card {
-    flex-basis: 100%;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .trending-card-image-wrap {
-    height: 180px;
-  }
-
-  .trending-title {
-    font-size: 20px;
-    margin-bottom: 14px;
   }
 }

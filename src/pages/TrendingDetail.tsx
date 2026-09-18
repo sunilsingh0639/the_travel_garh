@@ -367,6 +367,9 @@ function handleContinue(e: React.FormEvent) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (!flightTicket) { setErr('Please select Flight/Train ticket status.'); return }
+    if (!hotelCategoryChoice) { setErr('Please select Preferred Hotel Category *.'); return }
+    if (!budget) { setErr('Please select Your Budget.'); return }
     setLoading(true); setErr(''); setOk('')
     const placesText = selectedPlaces.length ? ` (Places: ${selectedPlaces.join(', ')})` : ''
     const extraText = [
@@ -502,7 +505,7 @@ function handleContinue(e: React.FormEvent) {
   //     )}
 
   //     <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
-  //       <div style={{ flex: 1 }}><input type="date" placeholder="Date of Travel" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' }} /></div>
+  //       <div style={{ flex: 1 }}><input type="date" required placeholder="Date of Travel" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' }} /></div>
 
   //       <div style={{ flex: 1 }}>
   //         <input
@@ -639,19 +642,21 @@ const formContent = (
 
           <div style={{ marginBottom: 12 }}>
             <input
-              placeholder="Which city are you travelling from?"
+              placeholder="Which city are you travelling from? *"
               value={travellingFromCity}
               onChange={e => setTravellingFromCity(e.target.value)}
+                required
               style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' as any }}
             />
           </div>
 
           <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
-            <div style={{ flex: 1 }}><input type="date" placeholder="Date of Travel" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' }} /></div>
+            <div style={{ flex: 1 }}><input type="date" required placeholder="Date of Travel" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' }} /></div>
 
             <div style={{ flex: 1 }}>
               <input
                 type="number"
+                required
                 min={1}
                 placeholder="Traveller Count"
                 value={travellers || ''}
@@ -678,7 +683,7 @@ const formContent = (
         <>
           <div style={{ marginBottom: 18 }}>
             <label style={{ fontSize: 13, fontWeight: 600, color: '#333', marginBottom: 8, display: 'block' }}>
-              Have you already booked your Flight/Train tickets?
+              Have you already booked your Flight/Train tickets? *
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
               <button
@@ -710,7 +715,7 @@ const formContent = (
 
           <div style={{ marginBottom: 18 }}>
             <label style={{ fontSize: 13, fontWeight: 600, color: '#333', marginBottom: 8, display: 'block' }}>
-              Preferred Hotel Category
+              Preferred Hotel Category *
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
               {['3 Star', '4 Star', '5 Star'].map(cat => (
@@ -733,7 +738,7 @@ const formContent = (
 
           <div style={{ marginBottom: 24 }}>
             <label style={{ fontSize: 13, fontWeight: 600, color: '#333', marginBottom: 8, display: 'block' }}>
-              Your Budget (per person)
+              Your Budget (per person) *
             </label>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {['5k to 10k', '10k to 20k', '20k to 35k+'].map(b => (
