@@ -164,7 +164,7 @@ const fetchPackages = (cityName: string) => {
 
       <ReviewSection />
 
-      <div style={{ background: '#f5f5f5', padding: `35px ${pad}px` }}>
+      <div style={{ background: '#f5f5f5', padding: `35px ${pad}px`, display: 'none' }}>
         {/* <CityChips
           title={`${destination} Tour Packages From Popular Cities`}
           items={cities.map(c => `${destination} Tour Packages from ${c}`)}
@@ -174,7 +174,7 @@ const fetchPackages = (cityName: string) => {
         /> */}
         <div style={{ height: 50 }} />
         <CityChips
-          title="Popular Domestic Destinations"
+          title=""
           items={domesticList}
           labels={domesticList}
           active=""
@@ -182,7 +182,7 @@ const fetchPackages = (cityName: string) => {
         />
         <div style={{ height: 50 }} />
         <CityChips
-          title="Popular International Destinations"
+          title=""
           items={internationalList}
           labels={internationalList}
           active=""

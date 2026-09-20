@@ -1012,7 +1012,7 @@ function PriceCard({ pkg, saveStr, small, onEnquiry }: { pkg: PackageDetailModel
             </>
           ) : (
             <div style={{ width: '100%', textAlign: 'center' }}>
-              <div style={{ fontSize: small ? 20 : 26, fontWeight: 'bold', color: '#111' }}>Request for Price</div>
+              <div style={{ fontSize: small ? 20 : 26, fontWeight: 'bold', color: '#111' }}>Price on Request</div>
               <div style={{ fontSize: small ? 12 : 13, color: '#999', marginTop: 6 }}>Contact us for the best deal</div>
             </div>
           )}
