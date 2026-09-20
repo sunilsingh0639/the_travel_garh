@@ -133,7 +133,37 @@ export default function InternationalDetails() {
 
       <ReviewSection />
 
+<<<<<<< HEAD
       <div style={{ height: 32 }} />
+=======
+      <div style={{ background: '#f5f5f5', padding: `35px ${pad}px`, display: 'none' }}>
+        {/* <CityChips
+          title={`${destination} Tour Packages From Popular Cities`}
+          items={cities.map(c => `${destination} Tour Packages from ${c}`)}
+          labels={cities}
+          active={selectedCity}
+          onSelect={c => goTo(`/international/${name}/${c.toLowerCase().replace(/\s+/g, '-')}`)}
+        /> */}
+        <div style={{ height: 50 }} />
+        <CityChips
+          title=""
+          items={domesticList}
+          labels={domesticList}
+          active=""
+          onSelect={c => goTo(`/domestic/${c.toLowerCase().replace(/\s+/g, '-')}`)}
+        />
+        <div style={{ height: 50 }} />
+        <CityChips
+          title=""
+          items={internationalList}
+          labels={internationalList}
+          active=""
+          onSelect={c => goTo(`/international/${c.toLowerCase().replace(/\s+/g, '-')}`)}
+        />
+      </div>
+
+      <div style={{ height: 60 }} />
+>>>>>>> 7496160 (code push)
     </>
   )
 }
