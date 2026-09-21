@@ -249,3 +249,67 @@
     padding: 4px 8px;
   }
 }
+
+/* CTA Buttons */
+.pkg-card-cta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.pkg-card-cta-call,
+.pkg-card-cta-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 6px;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+.pkg-card-cta-call {
+  background: #FFF0F0;
+  color: #D0021B;
+  border: 1.5px solid #FFCDD2;
+}
+
+.pkg-card-cta-call:hover {
+  background: #D0021B;
+  color: #fff;
+  border-color: #D0021B;
+}
+
+.pkg-card-cta-wa {
+  background: #F0FFF4;
+  color: #1A7A3C;
+  border: 1.5px solid #B2DFDB;
+}
+
+.pkg-card-cta-wa:hover {
+  background: #25D366;
+  color: #fff;
+  border-color: #25D366;
+}
+
+.pkg-card-cta-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .pkg-card-cta-call,
+  .pkg-card-cta-wa {
+    font-size: 11px;
+    padding: 8px 4px;
+  }
+}

@@ -186,28 +186,32 @@ export default function DomesticPackages() {
           ) : (
             <div
               style={{
-                display: w < 768 ? 'grid' : 'flex',
-                gridTemplateColumns: w < 768 ? '1fr' : undefined,
+                display: w < 768 ? 'flex' : 'flex',
+                flexDirection: w < 768 ? 'column' : 'row',
                 gap: 16,
                 overflowX: w < 768 ? 'visible' : 'auto',
                 paddingBottom: 8,
-                scrollSnapType:
-                  w < 768 ? 'none' : 'x mandatory',
+                scrollSnapType: w < 768 ? 'none' : 'x mandatory',
               }}
             >
               {packages.map(pkg => (
-                <div
-                  key={pkg.id}
-                  style={{
-                    flexShrink: 0,
-                    width: cardWidth,
-                  }}
-                >
+                w < 768 ? (
                   <PackageCard
+                    key={pkg.id}
                     pkg={pkg}
                     linkPath={`/trending/${pkg.slug}`}
                   />
-                </div>
+                ) : (
+                  <div
+                    key={pkg.id}
+                    style={{ flexShrink: 0, width: cardWidth }}
+                  >
+                    <PackageCard
+                      pkg={pkg}
+                      linkPath={`/trending/${pkg.slug}`}
+                    />
+                  </div>
+                )
               ))}
             </div>
           )}

@@ -121,11 +121,15 @@ const fetchPackages = (cityName: string) => {
             <p style={{ fontSize: 16, color: '#999' }}>No packages found for this destination.</p>
           ) : (
             <>
-              <div ref={scrollRef} style={{ display: w < 768 ? 'grid' : 'flex', gridTemplateColumns: w < 768 ? '1fr' : undefined, gap: 16, overflowX: w < 768 ? 'visible' : 'auto', paddingBottom: 8, scrollSnapType: w < 768 ? 'none' : 'x mandatory' }}>
+              <div ref={scrollRef} style={{ display: 'flex', flexDirection: w < 768 ? 'column' : 'row', gap: 16, overflowX: w < 768 ? 'visible' : 'auto', paddingBottom: 8, scrollSnapType: w < 768 ? 'none' : 'x mandatory' }}>
                 {packages.map(pkg => (
-                  <div key={pkg.id} className="image-card-slide">
-                    <PackageCard pkg={pkg} linkPath={`/trending/${pkg.slug}`} />
-                  </div>
+                  w < 768 ? (
+                    <PackageCard key={pkg.id} pkg={pkg} linkPath={`/trending/${pkg.slug}`} />
+                  ) : (
+                    <div key={pkg.id} className="image-card-slide">
+                      <PackageCard pkg={pkg} linkPath={`/trending/${pkg.slug}`} />
+                    </div>
+                  )
                 ))}
               </div>
 

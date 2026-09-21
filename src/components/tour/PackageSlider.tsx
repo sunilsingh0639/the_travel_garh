@@ -10,11 +10,14 @@ interface Props {
 export default function PackageSlider({ packages }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemWidth, setItemWidth] = useState(0)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const trackRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function calcWidth() {
-      if (trackRef.current) {
+      const mobile = window.innerWidth <= 768
+      setIsMobile(mobile)
+      if (!mobile && trackRef.current) {
         const first = trackRef.current.children[0] as HTMLElement | undefined
         if (first) {
           const style = getComputedStyle(trackRef.current)
@@ -40,7 +43,7 @@ export default function PackageSlider({ packages }: Props) {
         <div
           className="package-slider-track"
           ref={trackRef}
-          style={{ transform: `translateX(-${currentIndex * itemWidth}px)` }}
+          style={isMobile ? {} : { transform: `translateX(-${currentIndex * itemWidth}px)` }}
         >
           {packages.map(pkg => (
             <div key={pkg.id} className="package-slider-item">

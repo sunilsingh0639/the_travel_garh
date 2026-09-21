@@ -30,7 +30,7 @@
   }
 }
 
-@media (max-width: 599px) {
+@media (max-width: 768px) {
   .tour-packages-grid {
     grid-template-columns: 1fr;
     gap: 16px;

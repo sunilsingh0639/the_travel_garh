@@ -67,13 +67,12 @@
   }
 }
 
-@media (max-width: 599px) {
+@media (max-width: 768px) {
   .package-slider-viewport {
     overflow: visible;
   }
   .package-slider-track {
     flex-direction: column;
-    transform: none !important;
   }
   .package-slider-item {
     width: 100%;

@@ -285,3 +285,12 @@
     display: none;
   }
 }
+
+@media (max-width: 768px) {
+  .trending-card {
+    width: 100% !important;
+  }
+  .trending-scroll {
+    flex-direction: column;
+  }
+}
