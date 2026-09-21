@@ -194,13 +194,13 @@
 
 @media (min-width: 901px) {
   .package-card-img-wrap {
-    height: 170px;
+    height: 200px;
   }
 }
 
 @media (max-width: 599px) {
   .package-card-img-wrap {
-    height: 180px;
+    height: 250px;
   }
   .package-card-save-row {
     flex-wrap: wrap;

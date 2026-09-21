@@ -650,8 +650,8 @@ const formContent = (
             />
           </div>
 
-          <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
-            <div style={{ flex: 1 }}><input type="date" required placeholder="Date of Travel" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' }} /></div>
+          <div className="enquiry-date-traveller-row" style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
+            <div style={{ flex: 1 }}><input type="date" required className="enquiry-date-input" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' }} /></div>
 
             <div style={{ flex: 1 }}>
               <input
@@ -791,10 +791,10 @@ const formContent = (
 
   if (mobile) {
     return (
-      <div onClick={e => e.stopPropagation()} style={{ width: '100%', maxWidth: 500, background: '#fff', borderRadius: 20, maxHeight: '90vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      <div onClick={e => e.stopPropagation()} className="enquiry-modal-mobile" style={{ width: '100%', maxWidth: 500, background: '#fff', borderRadius: 20, maxHeight: '90vh', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {pkg ? (
           <>
-            <div style={{ padding: '16px 16px 12px', display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{ padding: '10px 12px 0px', display: 'flex', alignItems: 'center', gap: 12 }}>
               <img src={firstImg ? getImageUrl(firstImg) : staticImg} alt={pkgName} loading="lazy" style={{ width: 80, height: 80, borderRadius: 12, objectFit: 'cover', flexShrink: 0, display: 'none' }} />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 15, fontWeight: 'bold', color: '#000', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{pkgName}</div>
@@ -805,7 +805,7 @@ const formContent = (
             <hr style={{ margin: 0, border: 'none', borderTop: '1px solid #eee' }} />
           </>
         ) : (
-          <div style={{ padding: '16px 16px 12px', display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ padding: '10px 12px 0px', display: 'flex', alignItems: 'center', gap: 12 }}>
             <img src={staticImg} alt="Travel" loading="lazy" style={{ width: 80, height: 80, borderRadius: 12, objectFit: 'cover', flexShrink: 0, display: 'none' }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontSize: 15, fontWeight: 'bold', color: '#000', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>The TravelGarh</div>

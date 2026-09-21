@@ -52,13 +52,34 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 768px) {
   .modal-content {
     padding: 20px 16px;
   }
 
   .modal-overlay {
-    padding: 12px;
-    align-items: flex-end;
+    padding: 8px;
+    align-items: center;
+  }
+
+  .enquiry-modal-mobile {
+    transform: scale(0.9);
+    transform-origin: center center;
+    width: calc(100% / 0.9) !important;
+    max-width: calc(500px / 0.9) !important;
+  }
+
+  .enquiry-date-traveller-row {
+    flex-direction: column !important;
+  }
+
+  .enquiry-date-traveller-row > div {
+    flex: unset !important;
+    width: 100% !important;
+  }
+
+  .enquiry-date-input {
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 }
