@@ -137,7 +137,7 @@
 //     </div>
 //   )
 // }
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { TrendingModel } from '../../types'
 import { getTrendingSections } from '../../api/trending'
@@ -181,37 +181,16 @@ export default function TrendingSection() {
 }
 
 function TrendingRow({ section, navigate }: { section: TrendingModel; navigate: ReturnType<typeof useNavigate> }) {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [showLeftArrow, setShowLeftArrow] = useState(false)
-
-  function slide(delta: number) {
-    if (delta > 0) setShowLeftArrow(true)
-    scrollRef.current?.scrollBy({ left: delta, behavior: 'smooth' })
-  }
-
   return (
     <section className="trending-section">
       <h2 className="trending-title">{section.title}</h2>
 
       <div className="trending-slider-wrapper">
-        <div className="trending-scroll" ref={scrollRef}>
+        <div className="trending-scroll">
           {section.packages.map(pkg => (
             <TrendingCard key={pkg.id} pkg={pkg} onClick={() => navigate(`/trending/${pkg.slug}`, { state: pkg })} />
           ))}
         </div>
-
-        {section.packages.length > 1 && (
-          <>
-            {showLeftArrow && (
-              <button className="trending-arrow-btn left" onClick={() => slide(-296)} aria-label="Left">
-                <span className="trending-arrow-icon">&#10094;</span>
-              </button>
-            )}
-            <button className="trending-arrow-btn right" onClick={() => slide(296)} aria-label="Right">
-              <span className="trending-arrow-icon">&#10095;</span>
-            </button>
-          </>
-        )}
       </div>
     </section>
   )
@@ -293,7 +272,9 @@ function TrendingCard({ pkg, onClick }: { pkg: TrendingModel['packages'][0]; onC
         )}
 
         <div className="trending-card-price-row">
-          <span className="trending-card-price">₹ {pkg.price.toLocaleString()}</span>
+          <span className="trending-card-price">
+            {pkg.price > 0 ? `₹ ${pkg.price.toLocaleString()}` : 'Price on Request'}
+          </span>
           {pkg.cutPrice > 0 && (
             <span className="trending-card-cut-price">₹ {pkg.cutPrice.toLocaleString()}</span>
           )}

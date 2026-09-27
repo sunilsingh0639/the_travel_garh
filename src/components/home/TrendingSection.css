@@ -42,56 +42,15 @@
 }
 
 .trending-scroll {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 16px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
   padding: 8px 4px;
-}
-
-.trending-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.trending-arrow-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
-  background: white;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
-  z-index: 2;
-  transition: box-shadow 0.2s;
-}
-
-.trending-arrow-btn:hover {
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-}
-
-.trending-arrow-btn.left {
-  left: 10px;
-}
-
-.trending-arrow-btn.right {
-  right: 10px;
-}
-
-.trending-arrow-icon {
-  font-size: 22px;
-  color: rgba(0, 0, 0, 0.87);
 }
 
 /* Trending Card */
 .trending-card {
-  flex-shrink: 0;
+  width: 100% !important;
   background: white;
   border-radius: var(--radius-xl);
   overflow: hidden;
@@ -280,17 +239,14 @@
   }
 }
 
-@media (max-width: 599px) {
-  .trending-arrow-btn {
-    display: none;
+@media (max-width: 768px) {
+  .trending-scroll {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   }
 }
 
-@media (max-width: 768px) {
-  .trending-card {
-    width: 100% !important;
-  }
+@media (max-width: 599px) {
   .trending-scroll {
-    flex-direction: column;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
   }
 }
