@@ -241,12 +241,19 @@
 
 @media (max-width: 768px) {
   .trending-scroll {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
   }
-}
 
-@media (max-width: 599px) {
-  .trending-scroll {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  .trending-scroll > .trending-card {
+    flex: 0 0 82%;
+    min-width: 0;
+    scroll-snap-align: start;
   }
 }

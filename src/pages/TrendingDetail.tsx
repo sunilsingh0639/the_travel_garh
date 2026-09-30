@@ -667,7 +667,7 @@ const formContent = (
           </div>
 
           <div style={{ marginBottom: 16 }}>
-            <textarea rows={4} placeholder="Message (optional)" value={message} onChange={e => setMessage(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box', resize: 'vertical' }} />
+            <textarea rows={3} placeholder="Message (optional)" value={message} onChange={e => setMessage(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box', resize: 'vertical' }} />
           </div>
 
           <button type="submit" style={{
