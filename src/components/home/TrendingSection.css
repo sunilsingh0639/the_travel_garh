@@ -210,8 +210,8 @@
 
 .trending-card-price-row {
   display: flex;
+  justify-content: space-between;
   align-items: flex-end;
-  gap: 6px;
   margin-top: 8px;
 }
 

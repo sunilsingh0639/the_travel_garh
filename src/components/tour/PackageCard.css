@@ -151,8 +151,8 @@
 
 .package-card-price-row {
   display: flex;
+  justify-content: space-between;
   align-items: flex-end;
-  gap: 6px;
   margin-top: 8px;
 }
 
@@ -253,13 +253,14 @@
 /* CTA Buttons */
 .pkg-card-cta-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   margin-top: 12px;
 }
 
 .pkg-card-cta-call,
-.pkg-card-cta-wa {
+.pkg-card-cta-wa,
+.pkg-card-cta-enquiry {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -274,6 +275,19 @@
   transition: all 0.18s ease;
   white-space: nowrap;
   letter-spacing: 0.2px;
+}
+
+.pkg-card-cta-enquiry {
+  grid-column: 1 / -1;
+  background: #FFF0F0;
+  color: #D0021B;
+  border: 1.5px solid #FFCDD2;
+}
+
+.pkg-card-cta-enquiry:hover {
+  background: #D0021B;
+  color: #fff;
+  border-color: #D0021B;
 }
 
 .pkg-card-cta-call {
@@ -308,7 +322,8 @@
 
 @media (max-width: 768px) {
   .pkg-card-cta-call,
-  .pkg-card-cta-wa {
+  .pkg-card-cta-wa,
+  .pkg-card-cta-enquiry {
     font-size: 11px;
     padding: 8px 4px;
   }

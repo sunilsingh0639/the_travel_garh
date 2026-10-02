@@ -9,6 +9,7 @@ import { getPackageDetail } from '../api/package'
 import { getImageUrl, assetUrl } from '../api/client'
 import { submitEnquiry, type EnquiryPayload } from '../api/enquiry'
 import StayCategory from '../components/tour/StayCategory'
+import { useEnquiry, type EnquiryPackageContext } from '../components/tour/EnquiryContext'
 import ReviewSection from '../components/home/ReviewSection'
 import './TrendingDetail.css'
 import { useNavigate } from 'react-router-dom';
@@ -34,12 +35,10 @@ const REGIONS: Record<string, string[]> = {
 
 export default function TrendingDetail() {
   const { name: slug } = useParams()
+  const { openEnquiry } = useEnquiry()
   const [pkg, setPkg] = useState<PackageDetailModel | null>(null)
   const [loading, setLoading] = useState(true)
-  // const [expandedDay, setExpandedDay] = useState<number | null>(0)
-  // const [showEnquiry, setShowEnquiry] = useState(false)
   const [expandedDay, setExpandedDay] = useState<number | null>(0)
-  const [showEnquiry, setShowEnquiry] = useState(false)
   const [images, setImages] = useState<string[]>([])
   const [w, setW] = useState(1200)
 
@@ -64,7 +63,9 @@ useEffect(() => {
         sessionStorage.setItem('currentPkg', JSON.stringify({
           name: detail.name,
           city: detail.city,
-          image: detail.images[0]?.imagePath || ''
+          image: detail.images[0]?.imagePath || '',
+          slug: detail.slug,
+          nights: detail.nights,
         }))
       }
     }).catch(() => {}).finally(() => setLoading(false))
@@ -201,7 +202,13 @@ useEffect(() => {
             <div style={{ height: 20 }} />
             <PrivateTrips mobile />
             <div style={{ height: 20 }} />
-            <PriceCard pkg={pkg} saveStr={saveStr} small={w < 600} onEnquiry={() => setShowEnquiry(true)} />
+            <PriceCard pkg={pkg} saveStr={saveStr} small={w < 600} onEnquiry={() => openEnquiry({
+              name: pkg.name,
+              city: pkg.city,
+              image: pkg.images[0]?.imagePath || '',
+              slug: pkg.slug,
+              nights: pkg.nights,
+            })} />
           </div>
         ) : (
           <div style={{ display: 'flex', gap: 20, alignItems: 'flex-start' }}>
@@ -211,7 +218,13 @@ useEffect(() => {
               <PrivateTrips mobile={false} />
             </div>
             <div style={{ flex: 1 }}>
-              <PriceCard pkg={pkg} saveStr={saveStr} small={w < 600} onEnquiry={() => setShowEnquiry(true)} />
+              <PriceCard pkg={pkg} saveStr={saveStr} small={w < 600} onEnquiry={() => openEnquiry({
+                name: pkg.name,
+                city: pkg.city,
+                image: pkg.images[0]?.imagePath || '',
+                slug: pkg.slug,
+                nights: pkg.nights,
+              })} />
             </div>
           </div>
         )}
@@ -261,33 +274,27 @@ useEffect(() => {
       {/* ===== REVIEWS ===== */}
       <ReviewSection />
 
-      {/* ===== ENQUIRY MODAL ===== */}
-      {showEnquiry && (
-        <div className="modal-overlay" onClick={() => setShowEnquiry(false)}>
-          <EnquiryDialog pkg={pkg} mobile={mobile} onClose={() => setShowEnquiry(false)} showDestinationField />
-        </div>
-      )}
     </>
   )
 }
 
 /* ── Enquiry Dialog ── */
-function getPkgImage(pkg: PackageDetailModel | { name: string; city: string; image: string } | null): string {
+function getPkgImage(pkg: PackageDetailModel | EnquiryPackageContext | null): string {
   if (!pkg) return ''
   if ('images' in pkg && pkg.images?.[0]?.imagePath) return pkg.images[0].imagePath
-  if ('image' in pkg && pkg.image) return (pkg as any).image
+  if ('image' in pkg && pkg.image) return pkg.image
   return ''
 }
 
-function EnquiryDialog({ pkg, mobile, onClose, showDestinationField }: { pkg: PackageDetailModel | { name: string; city: string; image: string } | null; mobile: boolean; onClose: () => void; showDestinationField?: boolean }) {
+function EnquiryDialog({ pkg, mobile, onClose, showDestinationField, initialDestination = '' }: { pkg: PackageDetailModel | EnquiryPackageContext | null; mobile: boolean; onClose: () => void; showDestinationField?: boolean; initialDestination?: string }) {
   const navigate = useNavigate();
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [travelDate, setTravelDate] = useState('')
   const [message, setMessage] = useState('')
   const [travellers, setTravellers] = useState(0)
-  const [destination, setDestination] = useState('')
-  const [regionSearch, setRegionSearch] = useState('')
+  const [destination, setDestination] = useState(initialDestination)
+  const [regionSearch, setRegionSearch] = useState(initialDestination)
   const [showSuggestions, setShowSuggestions] = useState(false)
   // const [selectedPlaces, setSelectedPlaces] = useState<string[]>([])
   // const [err, setErr] = useState('')
@@ -295,7 +302,6 @@ function EnquiryDialog({ pkg, mobile, onClose, showDestinationField }: { pkg: Pa
   const [dialogStep, setDialogStep] = useState<1 | 2>(1)
   const [flightTicket, setFlightTicket] = useState<'yes' | 'no' | ''>('')
   const [hotelCategoryChoice, setHotelCategoryChoice] = useState('')
-  const [budget, setBudget] = useState('')
   const [travellingFromCity, setTravellingFromCity] = useState('')
   const [err, setErr] = useState('')
   const [ok, setOk] = useState('')
@@ -303,9 +309,13 @@ function EnquiryDialog({ pkg, mobile, onClose, showDestinationField }: { pkg: Pa
   const firstImg = getPkgImage(pkg)
   const pkgName = pkg?.name || ''
   const pkgCity = pkg?.city || ''
-  const pkgSlug = 'slug' in (pkg || {}) ? (pkg as any).slug || '' : ''
-  const pkgNights = 'nights' in (pkg || {}) ? (pkg as any).nights || 0 : 0
+  const pkgSlug = pkg?.slug || ''
+  const pkgNights = pkg?.nights || 0
   const staticImg = assetUrl('/images/goa.jpg')
+
+  useEffect(() => {
+    sessionStorage.setItem('enquiryPopupShown', 'true')
+  }, [])
 
   function selectRegion(r: string, place?: string) {
     setDestination(r)
@@ -349,15 +359,13 @@ function handleContinue(e: React.FormEvent) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!flightTicket) { setErr('Please select Flight/Train ticket status.'); return }
-    if (!hotelCategoryChoice) { setErr('Please select Preferred Hotel Category *.'); return }
-    if (!budget) { setErr('Please select Your Budget.'); return }
+    //if (!flightTicket) { setErr('Please select Flight/Train ticket status.'); return }
+    //if (!hotelCategoryChoice) { setErr('Please select Preferred Hotel Category *.'); return }
     setLoading(true); setErr(''); setOk('')
     const placesText = selectedPlaces.length ? ` (Places: ${selectedPlaces.join(', ')})` : ''
     const extraText = [
       flightTicket ? `Flight/Train Ticket Booked: ${flightTicket === 'yes' ? 'Yes' : 'No'}` : '',
       hotelCategoryChoice ? `Hotel Category: ${hotelCategoryChoice}` : '',
-      budget ? `Budget: ₹${budget}` : '',
     ].filter(Boolean).join(' | ')
     const payload: EnquiryPayload = {
       name: name.trim(), email: regionSearch.trim(), phone: phone.trim(),
@@ -368,7 +376,6 @@ function handleContinue(e: React.FormEvent) {
       numberOfChildren: 0,
       isBookedFlightOrTrain: flightTicket === 'yes',
       preferredHotelCategory: hotelCategoryChoice,
-      budgetRange: budget,
       wantToExplore: selectedPlaces.join(', '),
       city: travellingFromCity,
       duration: pkgNights,
@@ -723,29 +730,6 @@ const formContent = (
                   }}
                 >
                   {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ marginBottom: 24 }}>
-            <label style={{ fontSize: 13, fontWeight: 600, color: '#333', marginBottom: 8, display: 'block' }}>
-              Your Budget (per person) *
-            </label>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {['5k to 10k', '10k to 20k', '20k to 35k+'].map(b => (
-                <button
-                  key={b}
-                  type="button"
-                  onClick={() => setBudget(b)}
-                  style={{
-                    padding: 12, borderRadius: 10, cursor: 'pointer', fontSize: 14, fontWeight: 600, textAlign: 'left',
-                    border: budget === b ? '2px solid #FF1E1E' : '1.5px solid #e0e0e0',
-                    background: budget === b ? '#FFF5F5' : '#fff',
-                    color: budget === b ? '#FF1E1E' : '#333',
-                  }}
-                >
-                  ₹ {b}
                 </button>
               ))}
             </div>

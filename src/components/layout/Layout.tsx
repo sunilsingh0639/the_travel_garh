@@ -3,6 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import WhatsAppButton from './WhatsAppButton'
 import ErrorBoundary from '../common/ErrorBoundary'
+import DestinationEnquiryAccess from '../tour/DestinationEnquiryAccess'
 
 export default function Layout() {
   return (
@@ -12,6 +13,7 @@ export default function Layout() {
         <ErrorBoundary>
           <Outlet />
         </ErrorBoundary>
+        <DestinationEnquiryAccess />
       </main>
       <Footer />
       <WhatsAppButton />
