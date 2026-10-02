@@ -42,10 +42,22 @@
 }
 
 .trending-scroll {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   gap: 16px;
   padding: 8px 4px;
+}
+
+.trending-scroll > .trending-card {
+  flex: 0 0 280px;
+  min-width: 0;
+  scroll-snap-align: start;
 }
 
 /* Trending Card */

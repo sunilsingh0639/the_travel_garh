@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import type { PackageDetailModel, ItineraryItem, HotelModel } from '../types'
 import { getPackageDetail } from '../api/package'
 import { getImageUrl, assetUrl } from '../api/client'
@@ -281,7 +283,6 @@ function EnquiryDialog({ pkg, mobile, onClose, showDestinationField }: { pkg: Pa
   const navigate = useNavigate();
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
   const [travelDate, setTravelDate] = useState('')
   const [message, setMessage] = useState('')
   const [travellers, setTravellers] = useState(0)
@@ -338,25 +339,6 @@ function EnquiryDialog({ pkg, mobile, onClose, showDestinationField }: { pkg: Pa
 
   const dialogPlaces = destination ? (REGIONS[destination] || []) : []
 
-  // async function handleSubmit(e: React.FormEvent) {
-  //   e.preventDefault()
-  //   if (!name.trim() || !phone.trim()) { setErr('Name and Mobile are required.'); return }
-  //   if (phone.trim().length < 10) { setErr('Please enter a valid 10-digit mobile number.'); return }
-  //   setLoading(true); setErr(''); setOk('')
-  //   const placesText = selectedPlaces.length ? ` (Places: ${selectedPlaces.join(', ')})` : ''
-  //   const payload: EnquiryPayload = {
-  //     name: name.trim(), email: email.trim(), phone: phone.trim(),
-  //     expectedTravelDate: travelDate || new Date().toISOString(),
-  //     message: (message.trim() + placesText).trim(), pageUrl: window.location.href,
-  //     packageSlug: pkgSlug, packageName: pkgName, destination: destination || pkgCity,
-  //     numberOfAdults: travellers,
-  //     numberOfChildren: 0,
-  //   }
-  //   const ok2 = await submitEnquiry(payload)
-  //   if (ok2) { setOk('Enquiry sent! Our expert will contact you soon.') }
-  //   else { setErr('Something went wrong. Please try again.') }
-  //   setLoading(false)
-  // }
 function handleContinue(e: React.FormEvent) {
     e.preventDefault()
     if (!name.trim() || !phone.trim()) { setErr('Name and Mobile are required.'); return }
@@ -378,7 +360,7 @@ function handleContinue(e: React.FormEvent) {
       budget ? `Budget: ₹${budget}` : '',
     ].filter(Boolean).join(' | ')
     const payload: EnquiryPayload = {
-      name: name.trim(), email: email.trim(), phone: phone.trim(),
+      name: name.trim(), email: regionSearch.trim(), phone: phone.trim(),
       expectedTravelDate: travelDate || new Date().toISOString(),
       message: [message.trim() + placesText, extraText].filter(Boolean).join(' | ').trim(), pageUrl: window.location.href,
       packageSlug: pkgSlug, packageName: pkgName, destination: destination || pkgCity,
@@ -433,8 +415,6 @@ function handleContinue(e: React.FormEvent) {
   //       <input required type="tel" placeholder="Mobile No. *" value={phone} onChange={e => setPhone(e.target.value)} maxLength={10}
   //         style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: '0 12px 12px 0', fontSize: 14, outline: 'none' }} />
   //     </div>
-
-  //     <div style={{ marginBottom: 12 }}>{inp('Email (optional)', email, setEmail, { type: 'email' })}</div>
 
   //     {showDestinationField && (
   //       <div style={{ marginBottom: 12, position: 'relative' }}>
@@ -505,8 +485,6 @@ function handleContinue(e: React.FormEvent) {
   //     )}
 
   //     <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
-  //       <div style={{ flex: 1 }}><input type="date" required placeholder="Date of Travel" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' }} /></div>
-
   //       <div style={{ flex: 1 }}>
   //         <input
   //           type="number"
@@ -569,8 +547,6 @@ const formContent = (
             <input required type="tel" placeholder="Mobile No. *" value={phone} onChange={e => setPhone(e.target.value)} maxLength={10}
               style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: '0 12px 12px 0', fontSize: 14, outline: 'none' }} />
           </div>
-
-          <div style={{ marginBottom: 12 }}>{inp('Email (optional)', email, setEmail, { type: 'email' })}</div>
 
           {showDestinationField && (
             <div style={{ marginBottom: 12, position: 'relative' }}>
@@ -651,7 +627,23 @@ const formContent = (
           </div>
 
           <div className="enquiry-date-traveller-row" style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
-            <div style={{ flex: 1 }}><input type="date" required className="enquiry-date-input" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ width: '100%', padding: '14px 14px', border: '1px solid #e0e0e0', borderRadius: 12, fontSize: 14, outline: 'none', boxSizing: 'border-box' }} /></div>
+            <div style={{ flex: 1 }}>
+              <DatePicker
+                selected={travelDate ? new Date(`${travelDate}T00:00:00`) : null}
+                onChange={(date: Date | null) => setTravelDate(date ? [
+                  date.getFullYear(),
+                  String(date.getMonth() + 1).padStart(2, '0'),
+                  String(date.getDate()).padStart(2, '0'),
+                ].join('-') : '')}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Date of Travel *"
+                required
+                withPortal={mobile}
+                wrapperClassName="enquiry-date-picker"
+                className="enquiry-date-input"
+                calendarClassName="enquiry-date-calendar"
+              />
+            </div>
 
             <div style={{ flex: 1 }}>
               <input

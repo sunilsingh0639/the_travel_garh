@@ -52,6 +52,31 @@
   box-sizing: border-box;
 }
 
+.enquiry-date-picker {
+  display: block;
+  width: 100%;
+}
+
+.enquiry-date-input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.enquiry-date-calendar .react-datepicker__day--selected,
+.enquiry-date-calendar .react-datepicker__day--keyboard-selected {
+  background-color: #FF1E1E;
+}
+
+.enquiry-date-calendar .react-datepicker__day--selected:hover,
+.enquiry-date-calendar .react-datepicker__day--keyboard-selected:hover {
+  background-color: #e01919;
+}
+
 @media (max-width: 768px) {
   .modal-content {
     padding: 20px 16px;
