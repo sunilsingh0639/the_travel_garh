@@ -1,4 +1,5 @@
 import { apiClient } from './client';
+import { notifyTelegram } from './telegram';
 
 export interface EnquiryPayload {
   name: string;
@@ -36,6 +37,10 @@ export interface EnquiryApiResponse {
 export async function submitEnquiry(payload: EnquiryPayload): Promise<EnquiryApiResponse | null> {
   try {
     const { data } = await apiClient.post<EnquiryApiResponse>('/enquiries', payload);
+    if (data?.success) {
+      // Fire-and-forget — Telegram failure never blocks the user
+      notifyTelegram(payload);
+    }
     return data;
   } catch {
     return null;
